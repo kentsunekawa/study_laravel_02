@@ -4,6 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Person;
+use App\Jobs\MyJob;
+use App\ScheduleObj;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $count = Person::all()->count();
+        $id = rand(0, $count + 1);
+        $schedule->job(new MyJob($id));
     }
 
     /**

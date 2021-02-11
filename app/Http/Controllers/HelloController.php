@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 use App\Facades\MyService;
 use Illuminate\Http\Request;
 use App\Person;
+use App\Jobs\MyJob;
+use Illuminate\Support\Facades\Storage;
+use App\Events\PersonEvent;
 
 class HelloController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        Person::get(['*'])->searchable();
         $msg = 'show people record.';
         $result = Person::get();
         $data = [
@@ -20,25 +22,21 @@ class HelloController extends Controller
         return view('hello.index', $data);
     }
 
-    public function send(Request $request) {
-        $input = $request->input('find');
-        $msg = 'search: ' . $input;
-        $result = Person::search($input)->get();
+    public function send(Request $request)
+    {
+        $id = $request->input('id');
+        $person = Person::find($id);
+
+        event(new PersonEvent($person));
+
+
         $data = [
-            'input' => $input,
-            'msg' => $msg,
-            'data' => $result,
+            'input' => '',
+            'msg' => 'id='. $id,
+            'data' => [$person],
         ];
         return view('hello.index', $data);
     }
-
-    // public function save($id, $name)
-    // {
-    //     $record = Person::find($id);
-    //     $record->name = $name;
-    //     $record->save();
-    //     return redirect()->route('hello');
-    // }
 
     public function other(){
         $person = new Person();

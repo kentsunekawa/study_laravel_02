@@ -2,12 +2,12 @@
     <h1>Hello/Index</h1>
    <p>{{$msg}}</p>
     <div>
-    <form action="/hello" method="post">
-        @csrf
-        <input type="text" id="find" name="find"
-            value="{{$input}}">
-        <input type="submit">
-    </form>
+        <form action="/hello" method="post">
+            @csrf
+            ID: <input type="text" id="id" name="id">
+            <input type="submit">
+        </form>
+
     </div>
     <hr>
     <table>
