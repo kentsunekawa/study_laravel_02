@@ -27,9 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $count = Person::all()->count();
-        $id = rand(0, $count + 1);
-        $schedule->job(new MyJob($id));
+        // $count = Person::all()->count();
+        // $id = rand(0, $count + 1);
+        // $schedule->job(new MyJob($id));
     }
 
     /**

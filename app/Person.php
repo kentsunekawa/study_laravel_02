@@ -28,9 +28,9 @@ class Person extends Model
         return new MyCollection($models);
     }
 
-    // public function getNameAttribute($value) {
-    //     return strtoupper($value);
-    // }
+    public function getNameAttribute($value) {
+        return strtoupper($value);
+    }
 
     public function setAllDataAttribute(Array $value) {
         $this->attributes['name'] = $value[0];

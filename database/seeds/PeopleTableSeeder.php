@@ -15,6 +15,7 @@ class PeopleTableSeeder extends Seeder
         $param = [
             'name' => 'taro',
             'mail' => 'taro@gmail.com',
+            'age' => 34,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ];
@@ -22,6 +23,7 @@ class PeopleTableSeeder extends Seeder
         $param = [
             'name' => 'hanako',
             'mail' => 'hanako@gmail.com',
+            'age' => 45,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ];
@@ -29,6 +31,7 @@ class PeopleTableSeeder extends Seeder
         $param = [
             'name' => 'takeshi',
             'mail' => 'takeshi@gmail.com',
+            'age' => 98,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ];

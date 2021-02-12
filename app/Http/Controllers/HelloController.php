@@ -7,18 +7,27 @@ use App\Person;
 use App\Jobs\MyJob;
 use Illuminate\Support\Facades\Storage;
 use App\Events\PersonEvent;
+use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class HelloController extends Controller
 {
-    public function index()
+    public function index($id = -1)
     {
-        $msg = 'show people record.';
-        $result = Person::get();
-        $data = [
-            'input' => '',
-            'msg' => $msg,
-            'data' => $result,
+
+        $opt = [
+            '--method'=>'get',
+            '--path'=>'hello',
+            '--sort'=>'uri',
+            '--compact'=>null,
         ];
+        $output = new BufferedOutput;
+        Artisan::call('route:list', $opt, $output);
+        $msg = $output->fetch();
+
+        $data = [
+            'msg' => $msg,
+         ];
         return view('hello.index', $data);
     }
 
@@ -51,5 +60,11 @@ class HelloController extends Controller
         } else {
             return Person::find($id)->toJson();
         }
+    }
+
+    public function clear() {
+        Artisan::call('cache:clear');
+        Artisan::call('event:clear');
+        return redirect()->route('hello');
     }
 }
